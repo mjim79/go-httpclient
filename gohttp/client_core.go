@@ -42,6 +42,10 @@ func (c *httpClient) do(method string, url string, headers http.Header, body int
 		panic(err)
 	}
 
+	if mock := mockupServer.getMock(method, url, string(requestBody)); mock != nil {
+		return mock.GetResponse()
+	}
+
 	request, err := http.NewRequest(method, url, bytes.NewBuffer(requestBody))
 	if err != nil {
 		return nil, errors.New("unable to create a new request")
