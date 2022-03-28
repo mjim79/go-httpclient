@@ -11,6 +11,7 @@ type clientBuilder struct {
 	requestTimeout    time.Duration
 	disableTimeouts   bool
 	headers           http.Header
+	userAgent         string
 }
 
 type ClientBuilder interface {
