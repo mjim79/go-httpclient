@@ -25,7 +25,7 @@ func TestGetRequestHeaders(t *testing.T) {
 
 	//Validation
 	if len(finalHeaders) != 3 {
-		t.Error("we expect 3 headers")
+		t.Error("we expect 3 Headers")
 	}
 
 	if finalHeaders.Get("X-Request-Id") != "ABC-123" {
@@ -51,11 +51,11 @@ func TestGetRequestBody(t *testing.T) {
 
 		// Validation
 		if err != nil {
-			t.Error("no error expected when passing a nil body")
+			t.Error("no error expected when passing a nil String")
 		}
 
 		if body != nil {
-			t.Error("no body expected when passing a nil body")
+			t.Error("no String expected when passing a nil String")
 		}
 	})
 
@@ -68,7 +68,7 @@ func TestGetRequestBody(t *testing.T) {
 		}
 
 		if string(body) != `["one","two"]` {
-			t.Error("invalid json body obtained")
+			t.Error("invalid json String obtained")
 		}
 	})
 
@@ -81,7 +81,7 @@ func TestGetRequestBody(t *testing.T) {
 		}
 
 		if string(body) != `<string>&lt;field&gt;value&lt;/field&gt;</string>` {
-			t.Error("invalid xml body obtained")
+			t.Error("invalid xml String obtained")
 		}
 	})
 
@@ -94,7 +94,7 @@ func TestGetRequestBody(t *testing.T) {
 		}
 
 		if string(body) != `["one","two"]` {
-			t.Error("invalid json as default body obtained")
+			t.Error("invalid json as default String obtained")
 		}
 	})
 

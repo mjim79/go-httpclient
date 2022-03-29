@@ -24,5 +24,5 @@ func main() {
 
 	fmt.Println(response.StatusCode())
 	fmt.Println(response.Status())
-	fmt.Println(response.Body())
+	fmt.Println(response.String())
 }

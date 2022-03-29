@@ -3,7 +3,7 @@ package examples
 import (
 	"errors"
 	"fmt"
-	"github.com/mjim79/go-httpclient/gohttp"
+	"github.com/mjim79/go-httpclient/gohttp_mock"
 	"net/http"
 	"testing"
 )
@@ -11,8 +11,8 @@ import (
 func TestCreateRepo(t *testing.T) {
 	t.Run("timeoutFromGithub", func(t *testing.T) {
 
-		gohttp.FlushMocks()
-		gohttp.AddMock(gohttp.Mock{
+		gohttp_mock.DeleteMocks()
+		gohttp_mock.AddMock(gohttp_mock.Mock{
 			Method:      http.MethodPost,
 			Url:         "https://api.github.com/user/repos",
 			RequestBody: `{"name":"test-repo","private":true}`,
@@ -42,8 +42,8 @@ func TestCreateRepo(t *testing.T) {
 
 	t.Run("noError", func(t *testing.T) {
 
-		gohttp.FlushMocks()
-		gohttp.AddMock(gohttp.Mock{
+		gohttp_mock.DeleteMocks()
+		gohttp_mock.AddMock(gohttp_mock.Mock{
 			Method:      http.MethodPost,
 			Url:         "https://api.github.com/user/repos",
 			RequestBody: `{"name":"test-repo","private":true}`,

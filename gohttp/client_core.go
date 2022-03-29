@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"errors"
+	"github.com/mjim79/go-httpclient/core"
+	"github.com/mjim79/go-httpclient/gohttp_mock"
 	"github.com/mjim79/go-httpclient/gomime"
 	"io/ioutil"
 	"net"
@@ -34,7 +36,7 @@ func (c *httpClient) getRequestBody(contentType string, body interface{}) ([]byt
 	}
 }
 
-func (c *httpClient) do(method string, url string, headers http.Header, body interface{}) (*Response, error) {
+func (c *httpClient) do(method string, url string, headers http.Header, body interface{}) (*core.Response, error) {
 
 	fullHeaders := c.getRequestHeaders(headers)
 
@@ -43,7 +45,7 @@ func (c *httpClient) do(method string, url string, headers http.Header, body int
 		panic(err)
 	}
 
-	if mock := mockupServer.getMock(method, url, string(requestBody)); mock != nil {
+	if mock := gohttp_mock.GetMock(method, url, string(requestBody)); mock != nil {
 		return mock.GetResponse()
 	}
 
@@ -67,11 +69,11 @@ func (c *httpClient) do(method string, url string, headers http.Header, body int
 		return nil, err
 	}
 
-	finalResponse := Response{
-		status:     response.Status,
-		statusCode: response.StatusCode,
-		headers:    response.Header,
-		body:       responseBody,
+	finalResponse := core.Response{
+		Status:     response.Status,
+		StatusCode: response.StatusCode,
+		Headers:    response.Header,
+		Body:       responseBody,
 	}
 	return &finalResponse, nil
 }
