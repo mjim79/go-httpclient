@@ -10,6 +10,7 @@ var (
 )
 
 func getHttpclient() gohttp.Client {
+
 	client := gohttp.NewBuilder().
 		SetConnectionTimeout(2 * time.Second).
 		SetResponseTimeout(3 * time.Second).

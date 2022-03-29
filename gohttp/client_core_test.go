@@ -1,6 +1,7 @@
 package gohttp
 
 import (
+	"github.com/mjim79/go-httpclient/gomime"
 	"net/http"
 	"testing"
 )
@@ -10,7 +11,7 @@ func TestGetRequestHeaders(t *testing.T) {
 	//Initialization
 	client := httpClient{}
 	commonHeaders := make(http.Header)
-	commonHeaders.Set("Content-Type", "application/json")
+	commonHeaders.Set("Content-Type", gomime.ContentTypeJson)
 	commonHeaders.Set("User-Agent", "cool-http-client")
 	client.builder = &clientBuilder{
 		headers:   commonHeaders,
@@ -31,7 +32,7 @@ func TestGetRequestHeaders(t *testing.T) {
 		t.Error("invalid request received")
 	}
 
-	if finalHeaders.Get("Content-Type") != "application/json" {
+	if finalHeaders.Get("Content-Type") != gomime.ContentTypeJson {
 		t.Error("invalid content type received")
 	}
 
@@ -60,7 +61,7 @@ func TestGetRequestBody(t *testing.T) {
 
 	t.Run("BodyWithJson", func(t *testing.T) {
 		requestBody := []string{"one", "two"}
-		body, err := client.getRequestBody("application/json", requestBody)
+		body, err := client.getRequestBody(gomime.ContentTypeJson, requestBody)
 
 		if err != nil {
 			t.Error("no error expected when marshaling slice as json")
